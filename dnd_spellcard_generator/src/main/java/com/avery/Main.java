@@ -23,8 +23,11 @@ public class Main {
             //buffer for testing purposes
             Scanner buffer = new Scanner(System.in);
             
-            //the line indicating where the start of the spells are
+            //the lines indicating where the start and end of the spells are
             String startLineIndicator = "The spells are presented in alphabetical order";
+            String endLineIndicator = "<!-- FOOTER -->";
+            String spellSeparationIndicator = "<hr class=\"separator\">";
+
             
             //variable initialisation
             int lines = 0;
@@ -43,6 +46,40 @@ public class Main {
             System.out.println("outofwhileloop");
             System.out.println(fileLines.size());
 
+
+            ArrayList<ArrayList<String>> spellsAsLists = new ArrayList<>();
+
+            //iterate through and find what lines the spells start and end
+            int currentIdx = 0;
+            while (true){
+                if (fileLines.get(currentIdx).contains(startLineIndicator)){
+                    currentIdx+=2;
+                    break;
+                }
+                currentIdx++;
+            }
+
+            System.out.println(currentIdx);
+            
+            //separating them by line indicator, then putting them in a 2d array
+            for (int i = currentIdx;i < fileLines.size();i++){
+                ArrayList<String> tempSpell = new ArrayList<>();
+                while (!fileLines.get(i).contains(endLineIndicator) && !fileLines.get(i).contains(spellSeparationIndicator)){
+                    i++;
+                    tempSpell.add(fileLines.get(i));
+                    System.out.println(i);
+                }
+                System.out.println("outttttt");
+                spellsAsLists.add(tempSpell);
+                if (fileLines.get(i).contains(endLineIndicator)){
+                    break;
+                }
+            }
+            System.out.println(spellsAsLists.size());
+            for (int j = 0; j < spellsAsLists.size();j++){
+                System.out.println(j + " " + spellsAsLists.get(j).size());
+            }
+            System.out.println(spellsAsLists.get(324));
 
             //close necessary readers and buffers.
             reader.close();
