@@ -79,23 +79,28 @@ public class spell {
         //description:
         this.spellDescription = String.join("<br>",rawSpell.subList(6,rawSpell.size()));
 
-
         
+    }
+
+    //whether or not this spell falls within these spell parameters.
+    public boolean filterSpell(char_class filterClass, int level){
+        return this.classes.contains(filterClass) && level == this.level;
     }
 
     @Override
     public String toString(){
-        return this.name+"\n"+
-        this.level+"\n"+
-        this.classes+"\n"+
-        this.school+"\n"+
-        this.casting_time+"\n"+
-        this.range+"\n"+
-        this.components+"\n"+
-        this.hasMaterialCom+"\n"+
-        this.materialCom+"\n"+
-        this.duration+"\n"+
-        this.spellDescription+"\n";
+        return this.name;
+        // return this.name+"\n"+
+        // this.level+"\n"+
+        // this.classes+"\n"+
+        // this.school+"\n"+
+        // this.casting_time+"\n"+
+        // this.range+"\n"+
+        // this.components+"\n"+
+        // this.hasMaterialCom+"\n"+
+        // this.materialCom+"\n"+
+        // this.duration+"\n"+
+        // this.spellDescription+"\n";
     }
 
 }
