@@ -27,6 +27,7 @@ public class Main {
             String startLineIndicator = "The spells are presented in alphabetical order";
             String endLineIndicator = "<!-- FOOTER -->";
             String spellSeparationIndicator = "<hr class=\"separator\">";
+            String spellNewLetterIndicator = "compendium-hr heading-anchor\" id=\"Spells";
 
             
             //variable initialisation
@@ -37,7 +38,7 @@ public class Main {
             //Iterate through each line and add it to fileLines. If it's too long of a line, then skip it.
             while ((nextLine = reader.readLine())!= null){
                 lines++;
-                System.out.println(lines + "  "+nextLine.length());
+                // System.out.println(lines + "  "+nextLine.length());
                 if (nextLine.length()> 50000){
                     continue;
                 }
@@ -59,27 +60,34 @@ public class Main {
                 currentIdx++;
             }
 
-            System.out.println(currentIdx);
+            // System.out.println(currentIdx);
             
             //separating them by line indicator, then putting them in a 2d array
             for (int i = currentIdx;i < fileLines.size();i++){
                 ArrayList<String> tempSpell = new ArrayList<>();
-                while (!fileLines.get(i).contains(endLineIndicator) && !fileLines.get(i).contains(spellSeparationIndicator)){
-                    i++;
+                while (!fileLines.get(i).contains(endLineIndicator) && !fileLines.get(i).contains(spellSeparationIndicator) && !fileLines.get(i).contains(spellNewLetterIndicator)){
+                    
                     tempSpell.add(fileLines.get(i));
-                    System.out.println(i);
+                    i++;
+                    // System.out.println(i);
                 }
-                System.out.println("outttttt");
+                // System.out.println("outttttt");
                 spellsAsLists.add(tempSpell);
                 if (fileLines.get(i).contains(endLineIndicator)){
                     break;
                 }
             }
             System.out.println(spellsAsLists.size());
-            for (int j = 0; j < spellsAsLists.size();j++){
-                System.out.println(j + " " + spellsAsLists.get(j).size());
+            // for (int j = 0; j < spellsAsLists.size();j++){
+            //     System.out.println(j + " " + spellsAsLists.get(j).size());
+            // }
+            // System.out.println(String.join("\n", spellsAsLists.get(25)));
+            ArrayList<String> test = spellsAsLists.get(1);
+            for (int k = 0;k < test.size();k++){
+                System.out.println(utils.removeTags(test.get(k)));
             }
-            System.out.println(spellsAsLists.get(324));
+            System.out.println("\n");
+            System.out.println(utils.removeTags(spellsAsLists.get(24).get(0)));
 
             //close necessary readers and buffers.
             reader.close();
