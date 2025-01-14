@@ -9,6 +9,7 @@ import java.util.Scanner;
 import com.avery.spell_Attributes.char_class;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
@@ -176,10 +177,91 @@ public class Main {
                 System.out.println(tsp);
             }
 
+            BufferedReader preGenScanner = new BufferedReader(new FileReader(new File("pre_generated.txt")));
+            Scanner postGenScanner = new Scanner(new File("post_generated.txt"));
+            FileWriter writer = new FileWriter("generated spellcards.html");
+            
+            // preGenScanner.useDelimiter("\n");
+            postGenScanner.useDelimiter("\n");
+            System.out.println(nextLine = preGenScanner.readLine());
 
+            while ((nextLine = preGenScanner.readLine())!= null){
+                writer.append(nextLine+"\n");
+                // System.out.println("heehaw");
+            }
+            // for (ArrayList<spell> tsp:spellsByLevel){
+            //     writer.append(tsp.toString()+"\n");
+            // }
+            for (ArrayList<spell> tsp:spellsByLevel){
+                for (spell tSpell:tsp){
+                    writer.append(" \n"+
+                    "<div id=\"c28ed7\" class=\"card card-left cardBlock class-1  \">\n"+
+							"<div class=\"front\">\n"+
+								"<div class=\"body\">\n"+
+									"<h3 class=\"name  lined srname\">"+tSpell.name+"</h3>\n"+
+												"<ul class=\"status lined\">\n"+
+												"<li><em>casting time</em>"+tSpell.casting_time+"</li>\n"+
+												"<li class=\"second\"><em>range</em>"+tSpell.range+"</li>\n"+
+												"<br clear=\"all\">\n"+
+											"</ul> \n"+
+											
+											"<ul class=\"status lined\">\n"+
+												"<li><em>components</em>"+tSpell.components+"</li>\n"+
+												"<li class=\"second \"><em>duration</em>"+tSpell.duration+"</li>	\n"+		
+												"<br clear=\"all\">\n"+
+											"</ul>\n"+
+
+                                            ((tSpell.hasMaterialCom)?"<b class=\"need\">"+tSpell.materialCom+"</b>":"")+"\n"+
+                                    
+                                    tSpell.spellDescription+"\n"+												
+									// "<p class=\"text    \">You extend your hand and trace a sigil of warding in the air. Until the end of your next turn, you have resistance against bludgeoning, piercing, and slashing damage dealt by weapon attacks.</p>											\n"+
+									
+								"</div>  \n"+  		
+								"<b class=\"class srclass\">"+utils.titleCase(chosen_class.toString())+"</b>\n"+
+								"<b class=\"type srtype\"> "+((tSpell.level == 0)?utils.titleCase(tSpell.school.toString()) + " Cantrip":"Level "+tSpell.level +" "+ utils.titleCase(tSpell.school.toString()))+"</b>\n"+
+							"</div>\n"+
+							"</div>\n"+
+                    "");
+                }
+            }
+            while (postGenScanner.hasNextLine()){
+                writer.append(postGenScanner.nextLine()+"\n");
+            }
+            
+            /*
+            writer.append(" \n"+
+                    "<div id=\"c28ed7\" class=\"card card-left cardBlock class-1  \">\n"+
+							"<div class=\"front\">\n"+
+								"<div class=\"body\">\n"+
+									"<h3 class=\"name  lined srname\">Blade Ward</h3>\n"+
+												"<ul class=\"status lined\">\n"+
+												"<li><em>casting time</em>1 action</li>\n"+
+												"<li class=\"second\"><em>range</em>Self</li>\n"+
+												"<br clear=\"all\">\n"+
+											"</ul> \n"+
+											
+											"<ul class=\"status lined\">\n"+
+												"<li><em>components</em>V, S</li>\n"+
+												"<li class=\"second \"><em>duration</em>1 round</li>	\n"+		
+												"<br clear=\"all\">\n"+
+											"</ul>\n"+
+												
+									"<p class=\"text    \">You extend your hand and trace a sigil of warding in the air. Until the end of your next turn, you have resistance against bludgeoning, piercing, and slashing damage dealt by weapon attacks.</p>											\n"+
+									
+								"</div>  \n"+  		
+								"<b class=\"class srclass\">Wizard</b>\n"+
+								"<b class=\"type srtype\">Abjuration cantrip</b>\n"+
+							"</div>\n"+
+							"</div>\n"+
+                    "");
+            */
+            
             //close necessary readers and buffers.
             reader.close();
             inputScanner.close();
+            preGenScanner.close();
+            postGenScanner.close();
+            writer.close();
 
         } 
         catch (FileNotFoundException e){

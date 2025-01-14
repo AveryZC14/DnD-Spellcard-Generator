@@ -1,0 +1,22 @@
+
+    .dislexic .card .text
+    {
+    	font-size: 9px;
+    }
+
+     .dislexic .card .text.smtext
+     {
+     	font-size: 8px;
+     }
+
+    body.dislexic, .dislexic h1, .dislexic h2, .dislexic h3, .dislexic h4, .dislexic h5, 
+    .dislexic h6, .dislexic .h1, .dislexic .h2, .dislexic .h3, .dislexic .h4, .dislexic .h5, .dislexic .h6 
+    {
+    	font-family: "OpenDyslexic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }	
+
+    .dislexic .card .name
+    {
+    	padding-top: 0;
+    	padding-bottom: 0;
+    }

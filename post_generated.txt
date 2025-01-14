@@ -1,0 +1,53 @@
+<br clear="all"><div class="noprint separator nomobile hide-added"></div>
+									<div class="card cardBlock card-right flip class-1">
+										<div class="backface">
+												<div class="body"><div class="line">					
+														<i class="b-lt"></i>
+														<i class="b-rt"></i>
+														<i class="b-lb"></i>
+														<i class="b-rb"></i>
+														<b class="level-1">
+5</b>
+														<b class="level-2">
+5</b>
+														<i class="icon-top "></i>
+														<i class="icon "></i>					
+														<i class="icon-bot "></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									<br clear="all">  
+
+</div>	</div>
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter25867631 = new Ya.Metrika({id:25867631,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/25867631" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+
+</body></html>
