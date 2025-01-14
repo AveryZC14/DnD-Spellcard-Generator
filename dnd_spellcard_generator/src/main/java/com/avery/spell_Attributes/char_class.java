@@ -1,5 +1,5 @@
 package com.avery.spell_Attributes;
-public enum player_class {
+public enum char_class {
     BARBARIAN,
     BARD,
     CLERIC,

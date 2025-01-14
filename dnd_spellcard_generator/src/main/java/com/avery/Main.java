@@ -82,12 +82,16 @@ public class Main {
             //     System.out.println(j + " " + spellsAsLists.get(j).size());
             // }
             // System.out.println(String.join("\n", spellsAsLists.get(25)));
-            ArrayList<String> test = spellsAsLists.get(1);
+            ArrayList<String> test = spellsAsLists.get(89);
             for (int k = 0;k < test.size();k++){
                 System.out.println(utils.removeTags(test.get(k)));
             }
             System.out.println("\n");
             System.out.println(utils.removeTags(spellsAsLists.get(24).get(0)));
+
+            spell tempspell = new spell(test);
+            System.out.println("\n");
+            System.out.println(tempspell);
 
             //close necessary readers and buffers.
             reader.close();
