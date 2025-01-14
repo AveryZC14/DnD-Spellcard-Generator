@@ -19,9 +19,23 @@ public class spell {
     public String spellDescription;
 
 
-    public spell(ArrayList<String> rawSpell){
+    public spell(ArrayList<String> rawData){
+        ArrayList<String> rawSpell = new ArrayList<>();
+        boolean inFig = false;
+        for (int i = 0;i< rawData.size();i++){
+            if (rawData.get(i).contains("<figure")){
+                inFig = true;
+            }
+            else if (rawData.get(i).contains("</figure>")){
+                inFig = false;
+            }
+            else if (!inFig && !rawData.get(i).contains("<div") && !rawData.get(i).contains("</div>")){
+                rawSpell.add(rawData.get(i));
+            }
+        }
         //name of the spell
         this.name = utils.removeTags(rawSpell.get(0));
+        // System.out.println(rawSpell.size());
 
         //line 2 contains the level, school of magic and classes
         String line2 = utils.removeTags(rawSpell.get(1));
@@ -47,12 +61,12 @@ public class spell {
         }
 
         //castingtime, range, duration;
-        this.casting_time = utils.removeTags(rawSpell.get(3)).substring(14);
-        this.range = utils.removeTags(rawSpell.get(4)).substring(7);
-        this.duration = utils.removeTags(rawSpell.get(6)).substring(10);
+        this.casting_time = utils.removeTags(rawSpell.get(2)).substring(14);
+        this.range = utils.removeTags(rawSpell.get(3)).substring(7);
+        this.duration = utils.removeTags(rawSpell.get(5)).substring(10);
 
         //components of the spell. little extra is needed if material components are a thing.
-        String compLine = utils.removeTags(rawSpell.get(5));
+        String compLine = utils.removeTags(rawSpell.get(4));
         this.materialCom = "";
         this.hasMaterialCom = compLine.contains("M");
         if (!this.hasMaterialCom){
@@ -63,7 +77,7 @@ public class spell {
         }
 
         //description:
-        this.spellDescription = String.join("<br>",rawSpell.subList(8,rawSpell.size()));
+        this.spellDescription = String.join("<br>",rawSpell.subList(6,rawSpell.size()));
 
 
         

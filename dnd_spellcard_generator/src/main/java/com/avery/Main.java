@@ -5,10 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.avery.spell_Attributes.char_class;
+
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
+    static int SPELL_MAX_LEVEL = 9;
     public static void main(String[] args) {
         System.out.println("Hello world!");
         try {
@@ -21,13 +25,16 @@ public class Main {
             //initialise required readers and Scanners.
             BufferedReader reader = new BufferedReader(new FileReader(spellCardsFile));
             //buffer for testing purposes
-            Scanner buffer = new Scanner(System.in);
+            Scanner inputScanner = new Scanner(System.in);
             
             //the lines indicating where the start and end of the spells are
             String startLineIndicator = "The spells are presented in alphabetical order";
             String endLineIndicator = "<!-- FOOTER -->";
             String spellSeparationIndicator = "<hr class=\"separator\">";
             String spellNewLetterIndicator = "compendium-hr heading-anchor\" id=\"Spells";
+
+            //all spells
+            ArrayList<spell> allSpells = new ArrayList<>();
 
             
             //variable initialisation
@@ -82,7 +89,7 @@ public class Main {
             //     System.out.println(j + " " + spellsAsLists.get(j).size());
             // }
             // System.out.println(String.join("\n", spellsAsLists.get(25)));
-            ArrayList<String> test = spellsAsLists.get(89);
+            ArrayList<String> test = spellsAsLists.get(205);
             for (int k = 0;k < test.size();k++){
                 System.out.println(utils.removeTags(test.get(k)));
             }
@@ -93,9 +100,61 @@ public class Main {
             System.out.println("\n");
             System.out.println(tempspell);
 
+            //turning the spells as lists into spell objects.
+            for (int i = 1;i<spellsAsLists.size();i++){
+                // System.out.println(i);
+                if (spellsAsLists.get(i).size() > 8){
+                    allSpells.add(new spell(spellsAsLists.get(i)));
+                }
+            }
+
+
+            //filter spells
+            System.out.println("What class do you want spells for");
+            char_class[] classes = char_class.values();
+            for (int i = 0; i < classes.length;i++){
+                System.out.println(i +": "+ classes[i]);
+            }
+            int chosenClassIdx = -1;
+            while (chosenClassIdx < 0 || chosenClassIdx > classes.length){
+                System.out.println("input a number between 0 and "+classes.length);
+                String inp = inputScanner.nextLine();
+                try{
+                    chosenClassIdx = Integer.parseInt(inp);
+                }finally{
+                    
+                }
+            }
+            char_class chosen_class = classes[chosenClassIdx];
+
+            int chosenLowestLevel = -1;
+            int chosenHighestLevel = -1;
+
+            while (chosenLowestLevel < 0 || chosenLowestLevel > SPELL_MAX_LEVEL){
+                System.out.println("what's the lowest spell level you want? 0-"+SPELL_MAX_LEVEL);
+                String inp = inputScanner.nextLine();
+                try{
+                    chosenLowestLevel = Integer.parseInt(inp);
+                }finally{
+                    
+                }
+            }
+            
+            while (chosenHighestLevel < chosenLowestLevel || chosenHighestLevel > SPELL_MAX_LEVEL){
+                System.out.println("what's the highest spell level you want? "+chosenLowestLevel + " - " +SPELL_MAX_LEVEL);
+                String inp = inputScanner.nextLine();
+                try{
+                    chosenHighestLevel = Integer.parseInt(inp);
+                }finally{
+                    
+                }
+            }
+
+            System.out.println("\n"+chosen_class+"\n"+chosenLowestLevel+"\n"+chosenHighestLevel);
+
             //close necessary readers and buffers.
             reader.close();
-            buffer.close();
+            inputScanner.close();
 
         } 
         catch (FileNotFoundException e){
